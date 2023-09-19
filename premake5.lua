@@ -1,8 +1,33 @@
--- premake5.lua
-workspace "glad"
-    architecture "x64"
-    configurations { "Debug", "Release", "Dist" }
+project "glad"
+    kind "StaticLib"
+    language "C"
+    staticruntime "off"
 
-outputdir = "%{cfg.system}-%{cfg.architecture}-%{cfg.buildcfg}"
+    targetdir ("bin/%{prj.name}-%{cfg.buildcfg}/out")
+    objdir ("bin/%{prj.name}-%{cfg.buildcfg}/int")
 
-include "glad"
+    includedirs {
+        "include"
+    }
+
+    files {
+        "src/glad.c"
+    }
+
+    filter "configurations:Debug"
+        defines "DEBUG"
+        runtime "Debug"
+        optimize "off"
+        symbols "on"
+    
+    filter "configurations:Release"
+        defines "NDEBUG"
+        runtime "Release"
+        optimize "on"
+        symbols "on"
+    
+    filter "configurations:Dist"
+        defines "NDEBUG"
+        runtime "Release"
+        optimize "on"
+        symbols "off"
