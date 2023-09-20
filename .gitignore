@@ -50,6 +50,8 @@
 *.vcxproj
 *.vcxproj.user
 *.sln
+*.tlog
+*.lastbuildstate
 
 # Kernel Module Compile Results
 *.mod*
